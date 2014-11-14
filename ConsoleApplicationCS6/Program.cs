@@ -3,42 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-//cs 6 static members using
 using System.Console;
 
 namespace ConsoleApplicationCS6
 {
     class Program
     {
+        public static async Task<bool> Log(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+
+
+            try
+            {
+                throw new Exception("");
+            }
+            catch
+            {
+                await Task.Delay(1000);
+            }
+
+            return false;
+        }
+
         static void Main(string[] args)
         {
-            WriteLine("Hello world");
-            Persona p = new Persona("antonio");
-            Persona p2 = null;
+            Persona p = new Persona();
+            Log(new Exception());
 
-            //null prop
-            string s = p2?.Address?.ToString();
+            WriteLine(p?.myaddress?.Indirizzo);
 
+            p.myaddress = new Address() ;
+            WriteLine(p?.myaddress?.Indirizzo);
 
-            
+            int x=0;
 
-            //declaration expressions
-            if (long.TryParse("123", out long id))
-            {
-                Console.WriteLine(id);
-            }
         }
-    }
 
-    class Persona(string n)
+
+    }
+    class Persona
     {
-        private string nome = n;
+        public string Nome { get; set; } ="Antonio";
 
-        public Guid ID { get; set; }=Guid.NewGuid();
-
-        public string Address;
-
-        public string Nome { get; set; }=n;
+        public Address myaddress { get; set; }
     }
+
+    class Address
+    {
+        public string Indirizzo  => "via di qui";
+    }
+
 }

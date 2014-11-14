@@ -10,6 +10,11 @@ namespace ConsoleApplicationCS6
     {
         static void Main()
         {
+            NewMethod();
+        }
+
+        private static async void NewMethod()
+        {
             //exception filters
             try
             {
@@ -22,10 +27,9 @@ namespace ConsoleApplicationCS6
             catch (Exception ex) if (ex.Message == "Me")
             {
                 // this one will execute
+                await Task.Delay(100); //await in catch
                 Console.Write(ex.Message);
             }
         }
-
-
     }
 }
